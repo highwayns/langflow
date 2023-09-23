@@ -2,8 +2,9 @@ import sys
 import time
 import httpx
 from langflow.services.database.utils import session_getter
-from langflow.services.manager import initialize_services, initialize_settings_manager
-from langflow.services.utils import get_db_manager, get_settings_manager
+from langflow.services.utils import initialize_services
+from langflow.services.getters import get_db_manager, get_settings_manager
+from langflow.services.utils import initialize_settings_manager
 
 from multiprocess import Process, cpu_count  # type: ignore
 import platform
@@ -55,7 +56,7 @@ def display_results(results):
 
 def update_settings(
     config: str,
-    cache: str,
+    cache: Optional[str] = None,
     dev: bool = False,
     remove_api_keys: bool = False,
     components_path: Optional[Path] = None,
@@ -153,10 +154,10 @@ def run(
     log_file: Path = typer.Option(
         "logs/langflow.log", help="Path to the log file.", envvar="LANGFLOW_LOG_FILE"
     ),
-    cache: str = typer.Option(
+    cache: Optional[str] = typer.Option(
         envvar="LANGFLOW_LANGCHAIN_CACHE",
         help="Type of cache to use. (InMemoryCache, SQLiteCache)",
-        default="SQLiteCache",
+        default=None,
     ),
     jcloud: bool = typer.Option(False, help="Deploy on Jina AI Cloud"),
     dev: bool = typer.Option(False, help="Run in development mode (may contain bugs)"),
@@ -360,8 +361,8 @@ def superuser(
             # Verify that the superuser was created
             from langflow.services.database.models.user.user import User
 
-            user = session.query(User).filter(User.username == username).first()
-            if user is None:
+            user: User = session.query(User).filter(User.username == username).first()
+            if user is None or not user.is_superuser:
                 typer.echo("Superuser creation failed.")
                 return
 
