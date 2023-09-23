@@ -63,6 +63,8 @@ documentloaders:
     documentation: "https://python.langchain.com/docs/modules/data_connection/document_loaders/how_to/pdf"
   PyPDFLoader:
     documentation: "https://python.langchain.com/docs/modules/data_connection/document_loaders/how_to/pdf"
+  PyPDFLoaderWithOCR:
+    documentation: "https://python.langchain.com/docs/modules/data_connection/document_loaders/how_to/pdf"
   UnstructuredPowerPointLoader:
     documentation: "https://python.langchain.com/docs/modules/data_connection/document_loaders/integrations/microsoft_powerpoint"
   SRTLoader:

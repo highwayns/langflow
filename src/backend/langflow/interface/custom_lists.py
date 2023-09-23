@@ -68,7 +68,7 @@ documentloaders_type_to_cls_dict: dict[str, Any] = {
         f"langchain.document_loaders.{documentloader_name}"
     )
     for documentloader_name in document_loaders.__all__
-}
+} | {"PyPDFLoaderWithOCR": import_class(f"langflow.custom.PyPDFLoaderWithOCR.PyPDFLoaderWithOCR")}
 
 # Text Splitters
 textsplitter_type_to_cls_dict: dict[str, Any] = dict(

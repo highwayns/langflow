@@ -44,6 +44,7 @@ class DocumentLoaderFrontNode(FrontendNode):
             suffixes=[".md"], fileTypes=["md"]
         ),
         "PyPDFLoader": build_file_field(suffixes=[".pdf"], fileTypes=["pdf"]),
+        "PyPDFLoaderWithOCR": build_file_field(suffixes=[".pdf"], fileTypes=["pdf"]),
         "UnstructuredPowerPointLoader": build_file_field(
             suffixes=[".pptx", ".ppt"], fileTypes=["pptx", "ppt"]
         ),

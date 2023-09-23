@@ -159,7 +159,10 @@ def import_vectorstore(vectorstore: str) -> Any:
 
 def import_documentloader(documentloader: str) -> Any:
     """Import documentloader from documentloader name"""
-    return import_class(f"langchain.document_loaders.{documentloader}")
+    if documentloader == "PyPDFLoaderWithOCR" :
+        return import_class(f"langflow.custom.PyPDFLoaderWithOCR.{documentloader}")
+    else :
+        return import_class(f"langchain.document_loaders.{documentloader}")
 
 
 def import_textsplitter(textsplitter: str) -> Any:
