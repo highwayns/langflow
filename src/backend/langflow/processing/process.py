@@ -10,7 +10,6 @@ from loguru import logger
 from langflow.graph import Graph
 from langchain.chains.base import Chain
 from langchain.vectorstores.base import VectorStore
-from langchain.graphstores.base import GraphStore
 from typing import Any, Dict, List, Optional, Tuple, Union
 from langchain.schema import Document
 
@@ -111,7 +110,7 @@ def clear_caches_if_needed(clear_cache: bool):
 
 def load_langchain_object(
     data_graph: Dict[str, Any], session_id: str
-) -> Tuple[Union[Chain, VectorStore, GraphStore], Dict[str, Any], str]:
+) -> Tuple[Union[Chain, VectorStore], Dict[str, Any], str]:
     langchain_object, artifacts = get_build_result(data_graph, session_id)
     session_id = build_sorted_vertices_with_caching.hash
     logger.debug("Loaded LangChain object")
@@ -135,7 +134,7 @@ def process_inputs(inputs: Optional[dict], artifacts: Dict[str, Any]) -> dict:
     return inputs
 
 
-def generate_result(langchain_object: Union[Chain, VectorStore, GraphStore], inputs: dict):
+def generate_result(langchain_object: Union[Chain, VectorStore], inputs: dict):
     if isinstance(langchain_object, Chain):
         if inputs is None:
             raise ValueError("Inputs must be provided for a Chain")
@@ -143,8 +142,6 @@ def generate_result(langchain_object: Union[Chain, VectorStore, GraphStore], inp
         result = get_result_and_thought(langchain_object, inputs)
         logger.debug("Generated result and thought")
     elif isinstance(langchain_object, VectorStore):
-        result = langchain_object.search(**inputs)
-    elif isinstance(langchain_object, GraphStore):
         result = langchain_object.search(**inputs)
     elif isinstance(langchain_object, Document):
         result = langchain_object.dict()

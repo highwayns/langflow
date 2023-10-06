@@ -17,7 +17,6 @@ from pydantic import BaseModel, Field
 
 from langchain.chains.graph_qa.arangodb import ArangoGraphQAChain
 from langchain.chains.graph_qa.cypher import GraphCypherQAChain
-from langchain.chains.graph_qa.falkordb import FalkorDBQAChain
 from langchain.chains.graph_qa.hugegraph import HugeGraphQAChain
 from langchain.chains.graph_qa.kuzu import KuzuQAChain
 from langchain.chains.graph_qa.nebulagraph import NebulaGraphQAChain
@@ -208,23 +207,6 @@ class GraphCypherQAChain_(CustomChain):
     def run(self, *args, **kwargs):
         return super().run(*args, **kwargs)
 
-class FalkorDBQAChain_(CustomChain):
-    """Implementation of falkordb_qa_chain function"""
-
-    @staticmethod
-    def function_name():
-        return "falkordb_qa_chain"
-
-    @classmethod
-    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
-        return FalkorDBQAChain(llm=llm)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def run(self, *args, **kwargs):
-        return super().run(*args, **kwargs)
-
 class HugeGraphQAChain_(CustomChain):
     """Implementation of huge_graph_qa_chain function"""
 
@@ -298,7 +280,6 @@ CUSTOM_CHAINS: Dict[str, Type[Union[ConversationChain, CustomChain]]] = {
     "DataExtractChain": DataExtractChain,
     "ArangoGraphQAChain": ArangoGraphQAChain_,
     "GraphCypherQAChain": GraphCypherQAChain_,
-    "FalkorDBQAChain": FalkorDBQAChain_,
     "HugeGraphQAChain": HugeGraphQAChain_,
     "KuzuQAChain": KuzuQAChain_,
     "NebulaGraphQAChain": NebulaGraphQAChain_,

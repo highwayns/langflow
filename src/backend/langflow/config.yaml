@@ -44,8 +44,6 @@ chains:
     documentation: ""
   GraphCypherQAChain:
     documentation: ""
-  FalkorDBQAChain:
-    documentation: ""
   HugeGraphQAChain:
     documentation: ""
   KuzuQAChain:
@@ -303,8 +301,6 @@ vectorstores:
 graphstores:
   ArangoGraph:
     documentation: "https://python.langchain.com/docs/integrations/graphs/ArangoGraph"
-  FalkorDBGraph:
-    documentation: "https://python.langchain.com/docs/integrations/graphs/FalkorDBGraph"
   HugeGraph:
     documentation: "https://python.langchain.com/docs/integrations/graphs/HugeGraph"
   KuzuGraph:

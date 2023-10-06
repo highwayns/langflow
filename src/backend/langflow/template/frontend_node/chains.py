@@ -362,43 +362,6 @@ class GraphCypherQAChainNode(FrontendNode):
         # do nothing and don't return anything
         pass
 
-class FalkorDBQAChainNode(FrontendNode):
-    name: str = "FalkorDBQAChain"
-    template: Template = Template(
-        type_name="falkordb_qa_chain",
-        fields=[
-            TemplateField(
-                field_type="str",
-                required=True,
-                is_list=True,
-                show=True,
-                multiline=False,
-                options=QA_CHAIN_TYPES,
-                value=QA_CHAIN_TYPES[0],
-                name="chain_type",
-                advanced=False,
-            ),
-            TemplateField(
-                field_type="BaseLanguageModel",
-                required=True,
-                show=True,
-                name="llm",
-                display_name="LLM",
-                advanced=False,
-            ),
-        ],
-    )
-    description: str = """Load FalkorDBQA chain."""
-    base_classes: list[str] = ["BaseFalkorDBQAChain", "function"]
-
-    def to_dict(self):
-        return super().to_dict()
-
-    @staticmethod
-    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
-        # do nothing and don't return anything
-        pass
-
 class HugeGraphQAChainNode(FrontendNode):
     name: str = "HugeGraphQAChain"
     template: Template = Template(

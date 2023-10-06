@@ -89,64 +89,6 @@ class GraphStoreFrontendNode(FrontendNode):
             )
             extra_fields.extend((extra_field, extra_field2))
 
-        elif self.template.type_name == "FalkorDBGraph":
-            # New bool field for persist parameter
-            chroma_fields = [
-                TemplateField(
-                    name="persist",
-                    field_type="bool",
-                    required=False,
-                    show=True,
-                    advanced=False,
-                    value=False,
-                    display_name="Persist",
-                ),
-                # chroma_server_grpc_port: str | None = None,
-                TemplateField(
-                    name="chroma_server_host",
-                    field_type="str",
-                    required=False,
-                    show=True,
-                    advanced=True,
-                    display_name="Chroma Server Host",
-                ),
-                TemplateField(
-                    name="chroma_server_http_port",
-                    field_type="str",
-                    required=False,
-                    show=True,
-                    advanced=True,
-                    display_name="Chroma Server HTTP Port",
-                ),
-                TemplateField(
-                    name="chroma_server_ssl_enabled",
-                    field_type="bool",
-                    required=False,
-                    show=True,
-                    advanced=True,
-                    value=False,
-                    display_name="Chroma Server SSL Enabled",
-                ),
-                TemplateField(
-                    name="chroma_server_grpc_port",
-                    field_type="str",
-                    required=False,
-                    show=True,
-                    advanced=True,
-                    display_name="Chroma Server GRPC Port",
-                ),
-                TemplateField(
-                    name="chroma_server_cors_allow_origins",
-                    field_type="str",
-                    required=False,
-                    is_list=True,
-                    show=True,
-                    advanced=True,
-                    display_name="Chroma Server CORS Allow Origins",
-                ),
-            ]
-
-            extra_fields.extend(chroma_fields)
         elif self.template.type_name == "HugeGraph":
             # add pinecone_api_key and pinecone_env
             extra_field = TemplateField(

@@ -33,7 +33,6 @@ CUSTOM_NODES = {
         "create_extraction_chain": frontend_node.chains.DataExtractChainNode(),
         "arango_graph_qa_chain": frontend_node.chains.ArangoGraphQAChainNode(),
         "graph_cypher_qa_chain": frontend_node.chains.GraphCypherQAChainNode(),
-        "falkordb_qa_chain": frontend_node.chains.FalkorDBQAChainNode(),
         "huge_graph_qa_chain": frontend_node.chains.HugeGraphQAChainNode(),
         "kuzu_qa_chain": frontend_node.chains.KuzuQAChainNode(),
         "nebula_graph_qa_chain": frontend_node.chains.NebulaGraphQAChainNode(),
