@@ -112,6 +112,10 @@ class VectorStoreVertex(Vertex):
     def __init__(self, data: Dict):
         super().__init__(data, base_type="vectorstores")
 
+class GraphStoreVertex(Vertex):
+    def __init__(self, data: Dict):
+        super().__init__(data, base_type="graphstores")
+
 
 class MemoryVertex(Vertex):
     def __init__(self, data: Dict):

@@ -38,6 +38,22 @@ chains:
     documentation: "https://python.langchain.com/docs/modules/chains/popular/chat_vector_db"
   CombineDocsChain:
     documentation: ""
+  DataExtractChain:
+    documentation: ""
+  ArangoGraphQAChain:
+    documentation: ""
+  GraphCypherQAChain:
+    documentation: ""
+  FalkorDBQAChain:
+    documentation: ""
+  HugeGraphQAChain:
+    documentation: ""
+  KuzuQAChain:
+    documentation: ""
+  NebulaGraphQAChain:
+    documentation: ""
+  GraphSparqlQAChain:
+    documentation: ""
 documentloaders:
   AirbyteJSONLoader:
     documentation: "https://python.langchain.com/docs/modules/data_connection/document_loaders/integrations/airbyte_json"
@@ -284,6 +300,21 @@ vectorstores:
   # Requires docarray >=0.32.0 but langchain-serve requires jina 3.15.2 which doesn't support docarray >=0.32.0
   # DocArrayInMemorySearch:
   #   documentation: "https://python.langchain.com/docs/modules/data_connection/vectorstores/integrations/docarray_in_memory"
+graphstores:
+  ArangoGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/ArangoGraph"
+  FalkorDBGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/FalkorDBGraph"
+  HugeGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/HugeGraph"
+  KuzuGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/KuzuGraph"
+  NebulaGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/NebulaGraph"
+  Neo4jGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/Neo4jGraph"
+  NeptuneGraph:
+    documentation: "https://python.langchain.com/docs/integrations/graphs/NeptuneGraph"
 wrappers:
   RequestsWrapper:
     documentation: ""

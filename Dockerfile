@@ -18,5 +18,6 @@ RUN pip install Pillow==9.1.1 --user
 RUN pip install pyparsing==3.0.9 -U --user
 RUN pip install pytesseract==0.3.9 -U --user
 RUN pip install PyPDF2
+RUN pip install kor
 
 CMD ["python", "-m", "langflow", "--host", "0.0.0.0", "--port", "7860"]

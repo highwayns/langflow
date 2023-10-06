@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     MEMORIES: dict = {}
     EMBEDDINGS: dict = {}
     VECTORSTORES: dict = {}
+    GRAPHSTORES: dict = {}
     DOCUMENTLOADERS: dict = {}
     WRAPPERS: dict = {}
     RETRIEVERS: dict = {}
@@ -162,6 +163,7 @@ class Settings(BaseSettings):
         self.UTILITIES = new_settings.UTILITIES or {}
         self.EMBEDDINGS = new_settings.EMBEDDINGS or {}
         self.VECTORSTORES = new_settings.VECTORSTORES or {}
+        self.GRAPHSTORES = new_settings.GRAPHSTORES or {}
         self.DOCUMENTLOADERS = new_settings.DOCUMENTLOADERS or {}
         self.RETRIEVERS = new_settings.RETRIEVERS or {}
         self.OUTPUT_PARSERS = new_settings.OUTPUT_PARSERS or {}

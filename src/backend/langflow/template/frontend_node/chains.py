@@ -250,3 +250,299 @@ class CombineDocsChainNode(FrontendNode):
     def format_field(field: TemplateField, name: Optional[str] = None) -> None:
         # do nothing and don't return anything
         pass
+
+class DataExtractChainNode(FrontendNode):
+    name: str = "DataExtractChain"
+    template: Template = Template(
+        type_name="create_extraction_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load data extract chain."""
+    base_classes: list[str] = ["BaseDataExtractChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class ArangoGraphQAChainNode(FrontendNode):
+    name: str = "ArangoGraphQAChain"
+    template: Template = Template(
+        type_name="arango_graph_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load arangoGraphQA chain."""
+    base_classes: list[str] = ["BaseArangoGraphQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class GraphCypherQAChainNode(FrontendNode):
+    name: str = "GraphCypherQAChain"
+    template: Template = Template(
+        type_name="graph_cypher_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load graphCypherQA chain."""
+    base_classes: list[str] = ["BaseGraphCypherQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class FalkorDBQAChainNode(FrontendNode):
+    name: str = "FalkorDBQAChain"
+    template: Template = Template(
+        type_name="falkordb_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load FalkorDBQA chain."""
+    base_classes: list[str] = ["BaseFalkorDBQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class HugeGraphQAChainNode(FrontendNode):
+    name: str = "HugeGraphQAChain"
+    template: Template = Template(
+        type_name="huge_graph_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load HugeGraphQA chain."""
+    base_classes: list[str] = ["BaseHugeGraphQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class KuzuQAChainNode(FrontendNode):
+    name: str = "KuzuQAChain"
+    template: Template = Template(
+        type_name="kuzu_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load KuzuQA chain."""
+    base_classes: list[str] = ["BaseKuzuQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class NebulaGraphQAChainNode(FrontendNode):
+    name: str = "NebulaGraphQAChain"
+    template: Template = Template(
+        type_name="nebula_graph_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load NebulaGraphQA chain."""
+    base_classes: list[str] = ["BaseNebulaGraphQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass
+
+class GraphSparqlQAChainNode(FrontendNode):
+    name: str = "GraphSparqlQAChain"
+    template: Template = Template(
+        type_name="graph_sparql_qa_chain",
+        fields=[
+            TemplateField(
+                field_type="str",
+                required=True,
+                is_list=True,
+                show=True,
+                multiline=False,
+                options=QA_CHAIN_TYPES,
+                value=QA_CHAIN_TYPES[0],
+                name="chain_type",
+                advanced=False,
+            ),
+            TemplateField(
+                field_type="BaseLanguageModel",
+                required=True,
+                show=True,
+                name="llm",
+                display_name="LLM",
+                advanced=False,
+            ),
+        ],
+    )
+    description: str = """Load GraphSparqlQA chain."""
+    base_classes: list[str] = ["BaseGraphSparqlQAChain", "function"]
+
+    def to_dict(self):
+        return super().to_dict()
+
+    @staticmethod
+    def format_field(field: TemplateField, name: Optional[str] = None) -> None:
+        # do nothing and don't return anything
+        pass

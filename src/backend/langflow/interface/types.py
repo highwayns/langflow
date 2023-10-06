@@ -17,6 +17,7 @@ from langflow.interface.toolkits.base import toolkits_creator
 from langflow.interface.tools.base import tool_creator
 from langflow.interface.utilities.base import utility_creator
 from langflow.interface.vector_store.base import vectorstore_creator
+from langflow.interface.graph_store.base import graphstore_creator
 from langflow.interface.wrappers.base import wrapper_creator
 from langflow.interface.output_parsers.base import output_parser_creator
 from langflow.interface.custom.base import custom_component_creator
@@ -67,6 +68,7 @@ def build_langchain_types_dict():  # sourcery skip: dict-assign-update-to-union
         wrapper_creator,
         embedding_creator,
         vectorstore_creator,
+        graphstore_creator,
         documentloader_creator,
         textsplitter_creator,
         utility_creator,

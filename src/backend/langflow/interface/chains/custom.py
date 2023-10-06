@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Type, Union
+from typing import Dict, Optional, Type, Union, List
 
 from langchain.chains import ConversationChain
 from langchain.memory.buffer import ConversationBufferMemory
@@ -8,6 +8,20 @@ from pydantic import Field, root_validator
 from langchain.chains.question_answering import load_qa_chain
 from langflow.interface.utils import extract_input_variables_from_prompt
 from langchain.base_language import BaseLanguageModel
+
+import enum
+from kor import create_extraction_chain, Object, Text, Number
+import pydantic
+from kor import from_pydantic
+from pydantic import BaseModel, Field
+
+from langchain.chains.graph_qa.arangodb import ArangoGraphQAChain
+from langchain.chains.graph_qa.cypher import GraphCypherQAChain
+from langchain.chains.graph_qa.falkordb import FalkorDBQAChain
+from langchain.chains.graph_qa.hugegraph import HugeGraphQAChain
+from langchain.chains.graph_qa.kuzu import KuzuQAChain
+from langchain.chains.graph_qa.nebulagraph import NebulaGraphQAChain
+from langchain.chains.graph_qa.sparql import GraphSparqlQAChain
 
 DEFAULT_SUFFIX = """"
 Current conversation:
@@ -113,9 +127,182 @@ class CombineDocsChain(CustomChain):
     def run(self, *args, **kwargs):
         return super().run(*args, **kwargs)
 
+class Action(enum.Enum):
+    play = "play"
+    stop = "stop"
+    previous = "previous"
+    next_ = "next"
+
+class MusicRequest(BaseModel):
+    song: Optional[List[str]] = Field(
+        description="The song(s) that the user would like to be played."
+    )
+    album: Optional[List[str]] = Field(
+        description="The album(s) that the user would like to be played."
+    )
+    artist: Optional[List[str]] = Field(
+        description="The artist(s) whose music the user would like to hear.",
+        examples=[("Songs by paul simon", "paul simon")],
+    )
+    action: Optional[Action] = Field(
+        description="The action that should be taken; one of `play`, `stop`, `next`, `previous`",
+        examples=[
+            ("Please stop the music", "stop"),
+            ("play something", "play"),
+            ("play a song", "play"),
+            ("next song", "next"),
+        ],
+    )
+
+class DataExtractChain(CustomChain):
+    """Implementation of create_extraction_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "create_extraction_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        schema, validator = from_pydantic(MusicRequest)
+        return create_extraction_chain(
+            llm, schema, encoder_or_encoder_class="json", validator=validator
+        )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+
+class ArangoGraphQAChain_(CustomChain):
+    """Implementation of arango_graph_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "arango_graph_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return ArangoGraphQAChain(llm=llm)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+class GraphCypherQAChain_(CustomChain):
+    """Implementation of graph_cypher_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "graph_cypher_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return GraphCypherQAChain(llm=llm)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+class FalkorDBQAChain_(CustomChain):
+    """Implementation of falkordb_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "falkordb_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return FalkorDBQAChain(llm=llm)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+class HugeGraphQAChain_(CustomChain):
+    """Implementation of huge_graph_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "huge_graph_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return HugeGraphQAChain(llm=llm)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+class KuzuQAChain_(CustomChain):
+    """Implementation of kuzu_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "kuzu_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return KuzuQAChain(llm=llm)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+class NebulaGraphQAChain_(CustomChain):
+    """Implementation of nebula_graph_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "nebula_graph_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return NebulaGraphQAChain(llm=llm, chain_type=chain_type)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
+
+class GraphSparqlQAChain_(CustomChain):
+    """Implementation of graph_sparql_qa_chain function"""
+
+    @staticmethod
+    def function_name():
+        return "graph_sparql_qa_chain"
+
+    @classmethod
+    def initialize(cls, llm: BaseLanguageModel, chain_type: str):
+        return GraphSparqlQAChain(llm=llm, chain_type=chain_type)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def run(self, *args, **kwargs):
+        return super().run(*args, **kwargs)
 
 CUSTOM_CHAINS: Dict[str, Type[Union[ConversationChain, CustomChain]]] = {
     "CombineDocsChain": CombineDocsChain,
+    "DataExtractChain": DataExtractChain,
+    "ArangoGraphQAChain": ArangoGraphQAChain_,
+    "GraphCypherQAChain": GraphCypherQAChain_,
+    "FalkorDBQAChain": FalkorDBQAChain_,
+    "HugeGraphQAChain": HugeGraphQAChain_,
+    "KuzuQAChain": KuzuQAChain_,
+    "NebulaGraphQAChain": NebulaGraphQAChain_,
+    "GraphSparqlQAChain": GraphSparqlQAChain_,
     "SeriesCharacterChain": SeriesCharacterChain,
     "MidJourneyPromptChain": MidJourneyPromptChain,
     "TimeTravelGuideChain": TimeTravelGuideChain,
