@@ -25,7 +25,7 @@ class GraphstoreCreator(LangChainTypeCreator):
                 graphstore_name: import_class(
                     f"langchain.graphs.{graphstore_name}"
                 )
-                for graphstore_name in graphstores.__all__
+                for graphstore_name in graphs.__all__
             }
         return self.type_dict
 

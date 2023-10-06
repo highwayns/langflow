@@ -1,9 +1,9 @@
 from typing import Optional, Union
 from langflow import CustomComponent
 
-from langchain.graphs import NeptuneGraph
+from langchain.graphs.neptune_graph import NeptuneGraph
 from langchain.schema import Document
-from langchain.graphstores.base import GraphStore
+from langchain.graphs.base import GraphStore
 from langchain.schema import BaseRetriever
 from langchain.embeddings.base import Embeddings
 

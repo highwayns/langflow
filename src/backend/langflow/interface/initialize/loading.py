@@ -14,6 +14,7 @@ from langflow.interface.initialize.utils import (
 )
 
 from langflow.interface.initialize.vector_store import vecstore_initializer
+from langflow.interface.initialize.graph_store import grastore_initializer
 
 from pydantic import ValidationError
 
@@ -33,6 +34,7 @@ from langflow.interface.utils import load_file_into_dict
 from langflow.utils import validate
 from langchain.chains.base import Chain
 from langchain.vectorstores.base import VectorStore
+from langchain.graphs.base import GraphStore
 from langchain.document_loaders.base import BaseLoader
 from loguru import logger
 
@@ -99,6 +101,8 @@ def instantiate_based_on_type(class_object, base_type, node_type, params, user_i
         return instantiate_embedding(node_type, class_object, params)
     elif base_type == "vectorstores":
         return instantiate_vectorstore(class_object, params)
+    elif base_type == "graphstores":
+        return instantiate_graphstore(class_object, params)
     elif base_type == "documentloaders":
         return instantiate_documentloader(class_object, params)
     elif base_type == "textsplitters":
@@ -301,6 +305,21 @@ def instantiate_vectorstore(class_object: Type[VectorStore], params: Dict):
         vecstore = vecstore.as_retriever(search_kwargs=search_kwargs)
 
     return vecstore
+
+def instantiate_graphstore(class_object: Type[GraphStore], params: Dict):
+    search_kwargs = params.pop("search_kwargs", {})
+    if initializer := grastore_initializer.get(class_object.__name__):
+        grastore = initializer(class_object, params)
+    else:
+        if "texts" in params:
+            params["documents"] = params.pop("texts")
+        grastore = class_object.from_documents(**params)
+
+    # ! This might not work. Need to test
+    if search_kwargs and hasattr(grastore, "as_retriever"):
+        grastore = grastore.as_retriever(search_kwargs=search_kwargs)
+
+    return grastore
 
 
 def instantiate_documentloader(class_object: Type[BaseLoader], params: Dict):

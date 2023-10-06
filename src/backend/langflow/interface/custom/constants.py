@@ -7,6 +7,7 @@ from langchain.schema import BaseRetriever, Document
 from langchain.text_splitter import TextSplitter
 from langchain.tools import Tool
 from langchain.vectorstores.base import VectorStore
+from langchain.graphs.base import GraphStore
 from langchain.schema import BaseOutputParser
 from langchain.schema.memory import BaseMemory
 from langchain.memory.chat_memory import BaseChatMemory
@@ -22,6 +23,7 @@ LANGCHAIN_BASE_TYPES = {
     "Document": Document,
     "TextSplitter": TextSplitter,
     "VectorStore": VectorStore,
+    "GraphStore": GraphStore,
     "Embeddings": Embeddings,
     "BaseRetriever": BaseRetriever,
     "BaseOutputParser": BaseOutputParser,

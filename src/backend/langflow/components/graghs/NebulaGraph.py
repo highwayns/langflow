@@ -1,9 +1,9 @@
 from typing import Optional, Union
 from langflow import CustomComponent
 
-from langchain.graphs import NebulaGraph
+from langchain.graphs.nebula_graph import NebulaGraph
 from langchain.schema import Document
-from langchain.graphstores.base import GraphStore
+from langchain.graphs.base import GraphStore
 from langchain.schema import BaseRetriever
 from langchain.embeddings.base import Embeddings
 

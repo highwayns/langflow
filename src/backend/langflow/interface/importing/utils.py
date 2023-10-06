@@ -43,6 +43,7 @@ def import_by_type(_type: str, name: str) -> Any:
         "memory": import_memory,
         "embeddings": import_embedding,
         "vectorstores": import_vectorstore,
+        "graphstores": import_graphstore,
         "documentloaders": import_documentloader,
         "textsplitters": import_textsplitter,
         "utilities": import_utility,
@@ -155,6 +156,10 @@ def import_embedding(embedding: str) -> Any:
 def import_vectorstore(vectorstore: str) -> Any:
     """Import vectorstore from vectorstore name"""
     return import_class(f"langchain.vectorstores.{vectorstore}")
+
+def import_graphstore(graphstore: str) -> Any:
+    """Import graphstore from graphstore name"""
+    return import_class(f"langchain.graphs.{graphstore}")
 
 
 def import_documentloader(documentloader: str) -> Any:
